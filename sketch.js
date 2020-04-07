@@ -30,6 +30,9 @@ var table_y;
 var mouse_cell_x;
 var mouse_cell_y;
 
+var f_windowWidth;
+var f_windowHeight;
+
 function preload(){
 	petscii_table = loadImage('assets/petscii.png');
 }
@@ -56,12 +59,16 @@ function setup(){
 	brush_color = c_blue;
 	brush = 0;
 
+	f_windowWidth = 1920;
+	f_windowHeight = 983;
+
 	bg_color = c_black;
 	bg_mode = false;
-	canvas_x = windowWidth/2 - 32*16 + 64;
-	table_y =windowHeight/2 - 32*8;
 
-	createCanvas(windowWidth, windowHeight);
+	canvas_x = f_windowWidth/2 - 32*16 + 64;
+	table_y =f_windowHeight/2 - 32*8;
+
+	createCanvas(f_windowWidth, f_windowHeight);
 }
 
 function draw(){
@@ -85,7 +92,7 @@ function draw(){
 	for(let i = 0; i < 16; ++i){
 		let color = c_cyan;
 		square_x = canvas_x + 1024 + (i*64)%(4*64);
-		square_y = windowHeight/2+Math.floor(i/4)*64 - 128;
+		square_y = f_windowHeight/2+Math.floor(i/4)*64 - 128;
 
 		switch(i){
 			case 0:
@@ -160,7 +167,7 @@ function draw(){
 	//bg color menu
 	if(mouseIsPressed &&
 	  (mouseX > canvas_x+1024 && mouseX < canvas_x+1024 + 256) && 
-	  (mouseY > windowHeight/2-128-64 && mouseY < windowHeight/2-128)){
+	  (mouseY > f_windowHeight/2-128-64 && mouseY < f_windowHeight/2-128)){
 		if(mouseX > canvas_x+1024 + 128){
 			bg_mode = true;
 		}
@@ -172,7 +179,7 @@ function draw(){
 	//save/clear button code
 	if(mouseIsPressed &&
 	  (mouseX > canvas_x+1024 && mouseX < canvas_x+1024 + 256) && 
-	  (mouseY > windowHeight/2+128 && mouseY < windowHeight/2+128+64)){
+	  (mouseY > f_windowHeight/2+128 && mouseY < f_windowHeight/2+128+64)){
 		if(mouseX > canvas_x+1024 + 128){
 			painting = createImage(32*32, 32*32);
 		}
@@ -233,31 +240,31 @@ function draw(){
 	stroke(c_black);
 	strokeWeight(2);
 	fill(!bg_mode ? c_grey3 : c_grey1);
-	rect(canvas_x+1024, windowHeight/2-128-64, 128, 64);
+	rect(canvas_x+1024, f_windowHeight/2-128-64, 128, 64);
 	fill(bg_mode ? c_grey3 : c_grey1);
-	rect(canvas_x+1024 + 128, windowHeight/2-128-64, 128, 64);
+	rect(canvas_x+1024 + 128, f_windowHeight/2-128-64, 128, 64);
 
 	noStroke();
 	fill(c_black);
 	textSize(32);
 	textAlign(CENTER, CENTER);
-	text('brush', canvas_x+1024 + 64, windowHeight/2-128-64 + 32);
-	text('bg', canvas_x+1024 + 128 + 64, windowHeight/2-128-64 + 32);
+	text('brush', canvas_x+1024 + 64, f_windowHeight/2-128-64 + 32);
+	text('bg', canvas_x+1024 + 128 + 64, f_windowHeight/2-128-64 + 32);
 
 	//drawing the save/clear buttons
 	stroke(c_black);
 	strokeWeight(2);
 	fill(c_green);
-	rect(canvas_x+1024, windowHeight/2+128, 128, 64);
+	rect(canvas_x+1024, f_windowHeight/2+128, 128, 64);
 	fill(c_red);
-	rect(canvas_x+1024 + 128, windowHeight/2+128, 128, 64);
+	rect(canvas_x+1024 + 128, f_windowHeight/2+128, 128, 64);
 
 	noStroke();
 	fill(c_black);
 	textSize(32);
 	textAlign(CENTER, CENTER);
-	text('save', canvas_x+1024 + 64, windowHeight/2+128 + 32);
-	text('clear', canvas_x+1024 + 128 + 64, windowHeight/2+128 + 32);
+	text('save', canvas_x+1024 + 64, f_windowHeight/2+128 + 32);
+	text('clear', canvas_x+1024 + 128 + 64, f_windowHeight/2+128 + 32);
 }
 
 //hotkeys
